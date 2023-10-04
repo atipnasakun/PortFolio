@@ -3,8 +3,14 @@ const api = _api()
 const allGithubData = []
 async function startUp(){
   const repos = document.getElementById('repos')
+  const clients = document.getElementById('clients')
   const repo_count = document.getElementById('repo_count')
   let data =  await api.fetchAllRepositories()
+  console.log(data);
+  if(data.length === 0 ){
+    clients.innerHTML = ''
+    return
+  }
   repo_count.innerText = `(${data.length})`
   allGithubData.push(...data)
 
@@ -35,4 +41,12 @@ a2.innerText = 'see repo'
   // const deployment = await api.fetchApi(data[32].deployments_url)
     // console.log(deployment);
 }
+function setupEmail(){
+  const btn = document.getElementById('btn-mail')
+  btn.addEventListener('click',sendEmail)
+}
+function sendEmail() {
+  alert('sended')
+}
 startUp()
+setupEmail()
